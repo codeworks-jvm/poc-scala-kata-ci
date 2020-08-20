@@ -1,0 +1,22 @@
+{
+  "title" : "Reverse",
+  "difficulty" : 1,
+  "description" : "Given a string and its length, reverse the input string.",
+  "functionName": "reverseTheString",
+  "functionParameters" : [
+    {
+      "name" : "str",
+      "type" : "String"
+    },
+    {
+      "name" : "length",
+      "type" : "Integer"
+    }
+  ],
+  "test" : [
+    {
+      "parameters" : ["azerty", "6"],
+      "result" : "ytreza"
+    }
+  ]
+}
