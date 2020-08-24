@@ -1,11 +1,15 @@
 version: '2'
 services:
-  myjenkins:
+  kata-jenkins:
     image: "denisenguyencw/myjenkins:1.0"
     ports:
-      - "8081:8080"
-      - "50001:50000"
-  sonar:
+      - "127.0.0.1:8081:8080"
+      - "127.0.0.1:50001:50000"
+  kata-sonar:
     image: "sonarqube:8.4.1-community"
     ports:
-      - "9001:9000"
+      - "127.0.0.1:9001:9000"
+  kata-nexus:
+    image: "sonatype/nexus:oss"
+    ports:
+      - "127.0.0.1:8082:8081"
