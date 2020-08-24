@@ -8,7 +8,7 @@ case class Test(parameters: List[String], result: String)
 
 case class Kata(title: String, difficulty: Int, description: String,
                 functionName: String, functionParameters: List[FunctionParameters],
-                test: List[Test]) {
+                tests: List[Test]) {
 }
 
 object KataProtocol extends DefaultJsonProtocol {
