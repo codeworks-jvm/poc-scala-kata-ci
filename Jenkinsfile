@@ -6,16 +6,17 @@ pipeline {
         }
     }
     stages {
-        stage('Build') {
+        stage ('Build & Code quality scan') {
             steps {
-		        echo 'Building the application...'
-                sh 'mvn clean compile'
+                withSonarQubeEnv('SonarQubeScanner') {
+                    sh "mvn clean compile sonar:sonar"
+                }
             }
         }
         stage('Test') {
             steps {
 		        echo 'Testing the application...'
-                sh 'mvn test' 
+                sh 'mvn test'
             }
         }
 	    stage('Deploy') {
