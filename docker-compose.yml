@@ -1,0 +1,11 @@
+version: '2'
+services:
+  myjenkins:
+    image: "denisenguyencw/myjenkins:1.0"
+    ports:
+      - "8081:8080"
+      - "50001:50000"
+  sonar:
+    image: "sonarqube:8.4.1-community"
+    ports:
+      - "9001:9000"
