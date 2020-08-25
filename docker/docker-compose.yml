@@ -1,15 +1,23 @@
 version: '2'
 services:
   kata-jenkins:
+    container_name: kata-jenkins
     image: "denisenguyencw/myjenkins:1.0"
+    environment:
+      JAVA_OPTS: "-Djava.awt.headless=true"
+      JAVA_OPTS: "-Djenkins.install.runSetupWizard=false" # Start jenkins unlocked
     ports:
       - "127.0.0.1:8081:8080"
       - "127.0.0.1:50001:50000"
+    volumes:
+      - /var/jenkins_home
   kata-sonar:
+    container_name: kata-sonar
     image: "sonarqube:8.4.1-community"
     ports:
       - "127.0.0.1:9001:9000"
   kata-nexus:
+    container_name: kata-nexus
     image: "sonatype/nexus:oss"
     ports:
       - "127.0.0.1:8082:8081"
