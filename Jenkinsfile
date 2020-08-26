@@ -22,6 +22,7 @@ pipeline {
 	    stage('Deploy') {
 	        steps {
 		        echo 'Deploying the application...'
+		        sh 'mvn clean deploy -Dmaven.test.skip=true -DaltDeploymentRepository=nexus-2::default::http://192.168.1.71:8082/nexus/content/repositories/snapshots/'
 	        }
         }
     }

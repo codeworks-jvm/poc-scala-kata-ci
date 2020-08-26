@@ -170,17 +170,11 @@
             </plugin>
         </plugins>
     </build>
-
     <distributionManagement>
-        <repository>
-            <id>nexus-2</id>
-            <!--suppress UnresolvedMavenProperty -->
-            <url>${NEXUS_PROTOCOL}://${NEXUS_URL}:${NEXUS_HOST}/nexus/content/repositories/releases/</url>
-        </repository>
         <snapshotRepository>
             <id>nexus-2</id>
-            <!--suppress UnresolvedMavenProperty -->
-            <url>${NEXUS_PROTOCOL}://${NEXUS_URL}:${NEXUS_HOST}/nexus/content/repositories/snapshots/</url>
+            <name>snapshots</name>
+            <url>http://192.168.1.71:8082/nexus/content/repositories/snapshots/</url>
         </snapshotRepository>
     </distributionManagement>
 </project>
