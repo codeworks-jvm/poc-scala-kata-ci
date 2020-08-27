@@ -1,4 +1,11 @@
 pipeline {
+    environment {
+        NEXUS_VERSION = "nexus2"
+        NEXUS_PROTOCOL = "http"
+        NEXUS_URL = "http://192.168.1.71:8082"
+        NEXUS_REPOSITORY = "snapshots"
+        NEXUS_CREDENTIALS_ID = "nexus-2"
+    }
     agent {
         docker {
             image 'maven:3.3-jdk-8'
