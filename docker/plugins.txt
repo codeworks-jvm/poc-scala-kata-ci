@@ -49,7 +49,7 @@ matrix-auth:latest
 matrix-project:latest
 maven-plugin:latest
 momentjs:latest
-nexus-artifact-uploader:latest
+nexus-jenkins-plugin:latest
 okhttp-api:latest
 pam-auth:latest
 pipeline-build-step:latest
@@ -64,6 +64,7 @@ pipeline-rest-api:latest
 pipeline-stage-step:latest
 pipeline-stage-tags-metadata:latest
 pipeline-stage-view:latest
+pipeline-utility-steps:latest
 plain-credentials:latest
 plugin-util-api:latest
 resource-disposer:latest

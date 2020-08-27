@@ -1,11 +1,4 @@
 pipeline {
-    environment {
-        NEXUS_VERSION = "nexus2"
-        NEXUS_PROTOCOL = "http"
-        NEXUS_URL = "http://192.168.1.71:8082"
-        NEXUS_REPOSITORY = "snapshots"
-        NEXUS_CREDENTIALS_ID = "nexus-2"
-    }
     agent {
         docker {
             image 'maven:3.3-jdk-8'
@@ -13,7 +6,7 @@ pipeline {
         }
     }
     stages {
-        stage ('Build & Code quality scan') {
+        stage ('Build & Code Quality Scan') {
             steps {
                 withSonarQubeEnv('SonarQubeScanner') {
                     sh "mvn clean compile sonar:sonar"
@@ -26,11 +19,14 @@ pipeline {
                 sh 'mvn test'
             }
         }
-	    stage('Deploy') {
+	    stage('Deploy Snapshot') {
 	        steps {
 		        echo 'Deploying the application...'
-		        sh 'mvn clean deploy -Dmaven.test.skip=true -DaltDeploymentRepository=nexus-2::default::http://192.168.1.71:8082/nexus/content/repositories/snapshots/'
-	        }
+		        // Replace fileId with the created one's
+		        configFileProvider([configFile(fileId: '8310d80b-cf52-422d-9041-c61556b21e28', variable: 'MAVEN_GLOBAL_SETTINGS')]) {
+                    sh 'mvn -gs $MAVEN_GLOBAL_SETTINGS clean deploy -Dmaven.test.skip=true'
+                }
+            }
         }
     }
 }
