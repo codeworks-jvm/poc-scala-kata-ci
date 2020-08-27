@@ -22,6 +22,9 @@
         <scala.compat.version>2.11.</scala.compat.version>
         <scala.maven.plugin.version>3.4.6</scala.maven.plugin.version>
 
+        <!-- Custom properties : NEXUS -->
+        <custom.nexus.url>http://192.168.1.71:8082/nexus</custom.nexus.url>
+        <custom.nexus.repo.snapshots>${custom.nexus.url}/content/repositories/snapshots/</custom.nexus.repo.snapshots>
     </properties>
 
     <dependencies>
@@ -175,7 +178,7 @@
             <id>nexus-2</id>
             <name>snapshots</name>
             <layout>default</layout>
-            <url>http://192.168.1.71:8082/nexus/content/repositories/snapshots/</url>
+            <url>${custom.nexus.repo.snapshots}/</url>
         </snapshotRepository>
     </distributionManagement>
 </project>
