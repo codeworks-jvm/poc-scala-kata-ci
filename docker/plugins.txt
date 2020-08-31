@@ -9,6 +9,7 @@ branch-api:latest
 build-timeout:latest
 cloudbees-folder:latest
 command-launcher:latest
+config-file-provider:latest
 credentials:latest
 credentials-binding:latest
 display-url-api:latest

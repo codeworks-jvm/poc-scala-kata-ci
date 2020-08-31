@@ -1,23 +1,43 @@
 version: '2'
+volumes:
+  kata_jenkins_data:
+    external: true
+  kata_sonarqube_conf:
+    external: true
+  kata_sonarqube_data:
+    external: true
+  kata_sonarqube_extensions:
+    external: true
+  kata_nexus_data:
+    external: true
+
 services:
   kata-jenkins:
     container_name: kata-jenkins
-    image: "denisenguyencw/myjenkins:1.0"
-    environment:
-      JAVA_OPTS: "-Djava.awt.headless=true"
-      JAVA_OPTS: "-Djenkins.install.runSetupWizard=false" # Start jenkins unlocked
+    build:
+      context: ./
+      dockerfile: Dockerfile-kata-jenkins
     ports:
       - "8081:8080"
       - "50001:50000"
     volumes:
-      - /var/jenkins_home
+      - kata_jenkins_data:/var/jenkins_home
+
   kata-sonar:
     container_name: kata-sonar
     image: "sonarqube:8.4.1-community"
     ports:
-      - "9001:9000"
+      - "9002:9000"
+    volumes:
+      - kata_sonarqube_conf:/opt/sonarqube/conf
+      - kata_sonarqube_data:/opt/sonarqube/data
+      - kata_sonarqube_extensions:/opt/sonarqube/extensions
+
   kata-nexus:
     container_name: kata-nexus
     image: "sonatype/nexus:oss"
     ports:
-      - "8082:8081"
+      - "8083:8081"
+    volumes:
+      - kata_nexus_data:/sonatype/oss
+
