@@ -22,6 +22,9 @@
         <scala.compat.version>2.11.</scala.compat.version>
         <scala.maven.plugin.version>3.4.6</scala.maven.plugin.version>
 
+        <!-- Custom properties : NEXUS -->
+        <custom.nexus.url>http://192.168.1.71:8082/nexus</custom.nexus.url>
+        <custom.nexus.repo.snapshots>${custom.nexus.url}/content/repositories/snapshots/</custom.nexus.repo.snapshots>
     </properties>
 
     <dependencies>
@@ -71,11 +74,22 @@
         <plugins>
             <!-- TEST -->
 
-            <!-- Generate XML reports by default in arget/surefire-reports -->
+            <!-- Generate XML reports by default in target/surefire-reports -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>${maven.surefire.plugin.version}</version>
+                <configuration>
+                    <skipTests>true</skipTests>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>test</id>
+                        <goals>
+                            <goal>test</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
 
 
@@ -85,7 +99,11 @@
                 <version>${scalatest.maven.plugin.version}</version>
                 <configuration>
                     <reportsDirectory>${basedir}/target/site/tests-reports</reportsDirectory>
+                    <junitxml>.</junitxml>
+                    <filereports>Kata_Generator_TestSuite.txt</filereports>
                     <argLine>-DFile.encoding=UTF-8</argLine>
+                    <forkMode>never</forkMode>
+                    <parallel>false</parallel>
                 </configuration>
                 <executions>
                     <execution>
@@ -155,4 +173,12 @@
             </plugin>
         </plugins>
     </build>
+    <distributionManagement>
+        <snapshotRepository>
+            <id>nexus-2</id>
+            <name>snapshots</name>
+            <layout>default</layout>
+            <url>${custom.nexus.repo.snapshots}/</url>
+        </snapshotRepository>
+    </distributionManagement>
 </project>
