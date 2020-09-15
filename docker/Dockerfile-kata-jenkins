@@ -21,7 +21,7 @@ RUN add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/debia
 RUN apt update && apt install -y docker-ce
 RUN apt-get clean
 RUN usermod -aG docker jenkins
-#RUN chown -R :docker /var/run/docker.sock
+RUN chown -R :docker /var/run/docker.sock
 
 USER jenkins
 
